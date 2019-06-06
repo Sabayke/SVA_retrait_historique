@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <title> Historique</title>
+	 <meta charset="utf-8"></meta>
+	 <!--meta name="viewport" content="width=device-width, initial-scale=1">
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css.map"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap.css.map"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-reboot.css.map"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-reboot.min.css.map"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-grid.css.map"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-grid.min.css.map"></link-->
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-grid.css"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-grid.min.css"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-reboot.css"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-reboot.min.css"></link>
+</head>
+<body>
+
+<h2>Mon historique</h2>
+
+<div id="demo">
+<button class="btn btn-success" type="button" onclick="loadXMLDoc()">Historique</button>
+</div>
+
+<script>
+function loadXMLDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "../php/historique.php", true);
+  xhttp.send();
+}
+</script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="js/bootstrap.bundle.js"></script>
+ <script src="js/bootstrap.bundle.min.js"></script> 
+ <script src="js/bootstrap.js"></script>
+ <script src="js/bootstrap.min.js"></script>
+ <!--script src="js/bootstrap.bundle.min.js.map"></script>
+ <script src="js/bootstrap.js.map"></script>
+ <script src="js/bootstrap.bundle.js.map"></script>
+ <script src="js/bootstrap.min.js.map"></script-->
+</body>
+</html>

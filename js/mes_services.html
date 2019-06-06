@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head> 
+		<meta charset="utf-8">
+		<title> Mes services</title>
+	 <!--meta name="viewport" content="width=device-width, initial-scale=1">
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css.map"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap.css.map"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-reboot.css.map"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-reboot.min.css.map"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-grid.css.map"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-grid.min.css.map"></link-->
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-grid.css"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-grid.min.css"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-reboot.css"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-reboot.min.css"></link>
+</head>
+<body>
+		<h4> Bienvenue dans notre application </h4>
+		<ul>
+			<li>
+			<button class="btn btn-link" name="service retrait retrait">
+				<a href="confirm_retrait.html">Service de rétrait d'argent</a>
+			</button><br>
+			</li>
+			<li>
+			<button class="btn btn-link" name="service retrait retrait">
+				<a href="demande_retrait.html">Demande de rétrait d'argent</a>
+			</button><br>
+			</li>
+			<li>
+			<button class="btn btn-link" name="historique">
+				<a href="historique.html">Service d'historique</a>
+			</button><br>
+			</li>
+		</ul>
+		<!-- nos points dans dakar-->
+		<div id="googleMap" style="width:100%;height:400px;"> Nos points</div>
+ <script>
+function myMap() {
+var mapProp= {center:new google.maps.LatLng(51.508742,-0.120850),zoom:5,};
+var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+}
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDo0-o5hb_Utc9PXV0vJCWXNsl2AphuZRE&callback=myMap"></script>	
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+ <script src="js/bootstrap.bundle.js"></script>
+ <script src="js/bootstrap.bundle.min.js"></script> 
+ <script src="js/bootstrap.js"></script>
+ <script src="js/bootstrap.min.js"></script>
+ <!--script src="js/bootstrap.bundle.min.js.map"></script>
+ <script src="js/bootstrap.js.map"></script>
+ <script src="js/bootstrap.bundle.js.map"></script>
+ <script src="js/bootstrap.min.js.map"></script-->
+</body>
+</html>
