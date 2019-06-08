@@ -1,13 +1,13 @@
 ﻿<?php
 include 'my_db.php';
 	$montant_saisie = htmlspecialchars($_POST['montant_saisie']);
+	$montant		= htmlspecialchars($_SESSION['montant']);
 	$code    		= htmlspecialchars($_POST['code']);
 	if(!empty($montant_saisie) AND !empty($code)){
 			if($montant_saisie==$montant){
 				$verif_requete = $bdd->prepare("SELECT * FROM code_retrait WHERE Num_code= '" . $code . "' LIMIT 1");
 				$verif_requete->execute(array($code));
 				$etat_code = $verif_requete->rowCount();
-				$montant= htmlspecialchars($_SESSION['montant']);
 				if($etat_code==1){
 					$Etat= "utilisé";
 					$mise_a_jour1 = $bdd->prepare("
@@ -26,5 +26,5 @@ include 'my_db.php';
 					echo "le deux montant ne sont pas identique";
 				}
 	}else
-	echo "Veuillez remplir tous les champs";
+echo "Veuillez remplir tous les champs";
 ?>
