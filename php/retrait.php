@@ -1,4 +1,12 @@
 <?php
+/*
+**Projet SmS Banking
+** Service de Retrait d'argent
+** Réalisé par:  Brahim Elmoctar
+** mail: brahimelmoctar@yahoo.fr
+** site officiel: https://brahimelmoctar.000webhostapp.com
+** github : https://github.com/Sabayke
+*/
 //démarré une session et connexion à la base de donnée
 include 'my_db.php';
 /*recupération des variables */
@@ -66,7 +74,7 @@ include 'my_db.php';
 									//montant est une variable session pour faire une verification
 									$_SESSION['montant']= $montant;
 									//echo "Votre pouvez effectuer le retrait à n'importe quel point";
-									// gérer la validité du code
+									/* gérer la validité du code
 									$requete_date = $bdd->prepare("SELECT Date_de_creation FROM code_retrait WHERE Id_Client= '". $id_compte1 ."' LIMIT 1");
 									$requete_date->execute();
 									$date_de_creation = $requete_date->fetch()[0]; //date de création du code
@@ -85,7 +93,7 @@ include 'my_db.php';
 											
 										}else{
 												//le code est toujours valide
-											}
+											}*/
 								}else{
 									echo "Veuillez charger votre solde pour effectuer cette opération";
 									}
