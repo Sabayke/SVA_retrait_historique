@@ -3,12 +3,6 @@
 <head> 
 	 <meta charset="utf-8">
 	 <meta name="viewport" content="width=device-width, initial-scale=1">
-	 <!--link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css.map"></link>
-	 <link rel="stylesheet" type="text/css" href="../css/bootstrap.css.map"></link>
-	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-reboot.css.map"></link>
-	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-reboot.min.css.map"></link>
-	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-grid.css.map"></link>
-	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-grid.min.css.map"></link-->
 	 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"></link>
 	 <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"></link>
 	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-grid.css"></link>
@@ -38,15 +32,16 @@ function ConfirmerRetrait() {
 
 </head>
 <body>
+  <center>
 		<h4> Service de retrait d'argent </h4>
-		<form name="mon_formulaire" method="POST" action="confirm_retrait.php">
+		<form name="mon_formulaire" method="POST">
 		<table>
 			<tr>
 				<td>
 					<label>Veuillez saisir le montant à retiré : </label>
 				</td>
 				<td>
-					<input class="form-control" type="numeric" name="montant_saisie" id="montant_saisie" maxlength="1000000">
+					<input class="form-control" type="numeric" name="montant_saisie" id="montant_saisie" maxlength="6">
 				</td>
 			</tr>
 			<tr>
@@ -54,7 +49,7 @@ function ConfirmerRetrait() {
 					<label> Veuillez saisir le code :</label>
 				</td>
 				<td>
-					<input class="form-control" type="text" name="code" id="code">
+					<input class="form-control" type="text" name="code" id="code" maxlength="4">
 				</td>
 			</tr>
 			<tr>
@@ -67,14 +62,11 @@ function ConfirmerRetrait() {
 			</tr>
 		</table>
 		</form>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>	
+<script src="js/jquery.min.js"></script>	
  <script src="js/bootstrap.bundle.js"></script>
  <script src="js/bootstrap.bundle.min.js"></script> 
  <script src="js/bootstrap.js"></script>
  <script src="js/bootstrap.min.js"></script>
- <!--script src="js/bootstrap.bundle.js.map"></script>
- <script src="js/bootstrap.bundle.min.js.map"></script>
- <script src="js/bootstrap.js.map"></script>
- <script src="js/bootstrap.min.js.map"></script-->
+</center>
 </body>
 </html>

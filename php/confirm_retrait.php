@@ -33,13 +33,13 @@ include 'my_db.php';
 							$date_du_serveur = time(); // date du serveur
 							//recupérons la date du serveur
 							$date_limite = 2*24*60*60; // date d'éxpiration du code
-							if($date_du_serveur-$date_debut<=$date_limite)
+							if($date_du_serveur-$date_debut==$date_limite)
 								{ // si la difference est <= 2jours
 									// le code est invalide
 									$expire= "expiré";
 									$mise_a_jour4 = $bdd->prepare("
 										UPDATE code_retrait
-											SET Etat = '". $expire ."' WHERE Num_Code= '". $code_generator ."' LIMIT 1");
+											SET Etat = '". $expire ."' WHERE Num_Code= '". $code ."' LIMIT 1");
 									$mise_a_jour4->execute(array($expire));
 											echo "Votre code n'est plus valide";
 											
