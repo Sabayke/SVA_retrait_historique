@@ -17,13 +17,20 @@ include 'my_db.php';
 		// si les 2 champs : montant_saisie et code ne sont pas vide 
 			if($montant_saisie==$montant){
 				//on verifie  le montant
-				$verif_requete = $bdd->prepare("SELECT * FROM code_retrait WHERE Num_Code= '" . $code . "' LIMIT 1");
+				$verif_requete = $bdd->prepare("SELECT Num_Code FROM code_retrait WHERE Num_Code= '" . $code . "' LIMIT 1");
 				$verif_requete->execute(array($code));
 				$etat_code = $verif_requete->rowCount();
 				// verifions si le code existe
 				if($etat_code==1){
+					// verification si le code est déjà utilisé
+					$verif_requetes = $bdd->prepare("SELECT Etat FROM code_retrait WHERE Num_Code= '" . $code . "' LIMIT 1");
+					$verif_requetes->execute(array($code));
+						$utilisation = $verif_requetes->fetch()[0];
+						//var_dump($utilisation);
+						if($utilisation == 'inutilisé')
+						{
 					/* gérer la validité du code */
-							$requete_date = $bdd->prepare("SELECT Date_de_creation FROM code_retrait WHERE Num_Code= '". $code ."' LIMIT 1");
+							$requete_date = $bdd->prepare("SELECT Date_de_Creation FROM code_retrait WHERE Num_Code= '". $code ."' LIMIT 1");
 							$requete_date->execute();
 							$date_de_creation = $requete_date->fetch()[0]; //date de création du code
 							// recupérons le code et stockons le dans la variable $date_de_creation
@@ -33,7 +40,7 @@ include 'my_db.php';
 							$date_du_serveur = time(); // date du serveur
 							//recupérons la date du serveur
 							$date_limite = 2*24*60*60; // date d'éxpiration du code
-							if($date_du_serveur-$date_debut==$date_limite)
+							if($date_du_serveur-$date_debut>=$date_limite )
 								{ // si la difference est <= 2jours
 									// le code est invalide
 									$expire= "expiré";
@@ -57,7 +64,9 @@ include 'my_db.php';
 																echo "Félicitation le retrait à etait fait avec succés";
 											}
 					
-	
+	}else{
+		echo "le code est déjà utilisé";
+	}
 					
 					}else{
 						echo "le code est incorrect";}
