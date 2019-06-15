@@ -12,7 +12,7 @@
 	 <title> Retrait d'argent</title>
 		<script>
 function ConfirmerRetrait() {
-	var montant_saisie  = document.getElementById("montant_saisie").value;
+	//var montant_saisie  = document.getElementById("montant_saisie").value;
 	var code  		 	= document.getElementById("code").value;
 	var xhttp = new XMLHttpRequest();
 	var url = '../php/confirm_retrait.php';
@@ -36,14 +36,6 @@ function ConfirmerRetrait() {
 		<h4> Service de retrait d'argent </h4>
 		<form name="mon_formulaire" method="POST">
 		<table>
-			<tr>
-				<td>
-					<label>Veuillez saisir le montant à retiré : </label>
-				</td>
-				<td>
-					<input class="form-control" type="numeric" name="montant_saisie" id="montant_saisie" maxlength="6">
-				</td>
-			</tr>
 			<tr>
 				<td>
 					<label> Veuillez saisir le code :</label>
