@@ -10,12 +10,10 @@
 include 'my_db.php';
 // on démarre une session
 	// récupérons les variables avec le tableau associatif POST
-	$montant_saisie = htmlspecialchars($_POST['montant_saisie']);
-	$montant		= htmlspecialchars($_SESSION['montant']);
+
 	$code    		= htmlspecialchars($_POST['code']);
-	if(!empty($montant_saisie) AND !empty($code)){
-		// si les 2 champs : montant_saisie et code ne sont pas vide 
-			if($montant_saisie==$montant){
+	if(!empty($code)){
+		// si le champs code n'est pas vide 
 				//on verifie  le montant
 				$verif_requete = $bdd->prepare("SELECT Num_Code FROM code_retrait WHERE Num_Code= '" . $code . "' LIMIT 1");
 				$verif_requete->execute(array($code));
@@ -70,9 +68,18 @@ include 'my_db.php';
 					
 					}else{
 						echo "le code est incorrect";}
-				}else{
-					echo "le deux montant ne sont pas identique";
-				}
+				
 	}else
 echo "Veuillez remplir tous les champs";
 ?>
+<DOCTYPE html>
+	<html lang="fr">
+		<head>
+			<title> confirmation du retrait</title>
+			<meta charset="utf-8"></meta>
+		</head>
+	<body>
+		<form name="mon_formulaire" method="POST" action="confirm_retrait.php">
+			
+		</body>
+	</html>
