@@ -53,10 +53,10 @@ include 'my_db.php';
 												$id_compte = $compte->fetch()[0];
 									$services=   "retrait";
 									// on insére les données dans la table transactions
-									$id_transaction = random_int(1, 100);
+									//$id_transaction = random_int(1, 100);
 									$transaction_retrait= $bdd->prepare("INSERT INTO transaction 
-									(Id_Transaction,Id_Compte_1,Id_Compte_2,Type_Transaction,Frais_Transaction,Montant)
-										VALUES('".$id_transaction."','". $id_compte ."', '". $id_compte ."','". $services ."', '". $frais1 ."', '". $montant ."' )");
+									(Id_Compte_1,Id_Compte_2,Type_Transaction,Frais_Transaction,Montant)
+										VALUES('". $id_compte ."', '". $id_compte ."','". $services ."', '". $frais1 ."', '". $montant ."' )");
 
 									$transaction_retrait->execute(array($id_transaction,$id_compte,$id_compte,$services,$frais1,$montant));
 									$Etat= "inutilisé";
