@@ -7,6 +7,7 @@
 ** site officiel: https://brahimelmoctar.000webhostapp.com
 ** github : https://github.com/Sabayke
 */
+if(isset($_POST['confirmer'])){
 include 'my_db.php';
 // on démarre une session
 	// récupérons les variables avec le tableau associatif POST
@@ -69,17 +70,44 @@ include 'my_db.php';
 					}else{
 						echo "le code est incorrect";}
 				
-	}else
-echo "Veuillez remplir tous les champs";
+	}else {
+echo "Veuillez remplir tous les champs";}
+}
 ?>
-<DOCTYPE html>
-	<html lang="fr">
-		<head>
-			<title> confirmation du retrait</title>
-			<meta charset="utf-8"></meta>
-		</head>
-	<body>
+<!DOCTYPE html>
+<html lang="fr">
+<head> 
+	 <meta charset="utf-8">
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-grid.css"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-grid.min.css"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-reboot.css"></link>
+	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-reboot.min.css"></link>
+	 <title> Retrait d'argent</title>
+
+</head>
+<body>
+  <center>
+		<h4> Service de retrait d'argent </h4>
 		<form name="mon_formulaire" method="POST" action="confirm_retrait.php">
-			
-		</body>
-	</html>
+		<table>
+			<tr>
+				<td>
+					<label> Veuillez saisir le code :</label>
+				</td>
+				<td>
+					<input class="form-control" type="text" name="code" id="code" maxlength="4">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input class="btn btn-success" type="submit" name="confirmer" value="Valider">
+				</td>
+			</tr>
+		</table>
+		</form>
+</center>
+</body>
+</html>
