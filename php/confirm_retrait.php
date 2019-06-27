@@ -4,7 +4,7 @@
 ** Service de Retrait d'argent
 ** Réalisé par:  Brahim Elmoctar
 ** mail: brahimelmoctar@yahoo.fr
-** site officiel: https://brahimelmoctar.000webhostapp.com
+** site officiel: https://sabaykebremso.me
 ** github : https://github.com/Sabayke
 */
 if(isset($_POST['confirmer'])){
@@ -26,7 +26,7 @@ include 'my_db.php';
 					$verif_requetes->execute(array($code));
 						$utilisation = $verif_requetes->fetch()[0];
 						//var_dump($utilisation);
-						if($utilisation == 'inutilisé')
+						if($utilisation == 'inutilise')
 						{
 					/* gérer la validité du code */
 							$requete_date = $bdd->prepare("SELECT Date_de_Creation FROM code_retrait WHERE Num_Code= '". $code ."' LIMIT 1");
@@ -42,72 +42,95 @@ include 'my_db.php';
 							if($date_du_serveur-$date_debut>=$date_limite )
 								{ // si la difference est <= 2jours
 									// le code est invalide
-									$expire= "expiré";
+									$expire= "expire";
 									$mise_a_jour4 = $bdd->prepare("
 										UPDATE code_retrait
 											SET Etat = '". $expire ."' WHERE Num_Code= '". $code ."' LIMIT 1");
 									$mise_a_jour4->execute(array($expire));
-											echo "Votre code n'est plus valide";
+											$erreur= "Votre code n'est plus valide";
 											
 										}else{
 												//le code est toujours valide mais il est utilisé
-												$Etat= "utilisé";
+												$Etat= "utilise";
 												$mise_a_jour1 = $bdd->prepare("
 													UPDATE code_retrait
 														SET Etat= '". $Etat ."' WHERE Num_Code = '" . $code. "' ");
 													$mise_a_jour1->execute(array($code));	
-													$mise_a_jour2 = $bdd->prepare("
-														UPDATE code_retrait
-															SET Montat = '". $montant . "' WHERE Num_Code = '". $code ."' ");
-																$mise_a_jour2->execute(array($code));
-																echo "Félicitation le retrait à etait fait avec succés";
+													
+																$success= "Félicitation le retrait à etait fait avec succés";
 											}
 					
 	}else{
-		echo "le code est déjà utilisé";
+		$erreur= "le code est déjà utilisé";
 	}
 					
 					}else{
-						echo "le code est incorrect";}
+						$erreur= "le code est incorrect";}
 				
 	}else {
-echo "Veuillez remplir tous les champs";}
+$erreur= "Veuillez remplir tous les champs";}
 }
 ?>
 <!DOCTYPE html>
-<html lang="fr">
-<head> 
-	 <meta charset="utf-8">
-	 <meta name="viewport" content="width=device-width, initial-scale=1">
-	 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"></link>
-	 <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"></link>
-	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-grid.css"></link>
-	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-grid.min.css"></link>
-	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-reboot.css"></link>
-	 <link rel="stylesheet" type="text/css" href="../css/bootstrap-reboot.min.css"></link>
-	 <title> Retrait d'argent</title>
+<html>
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/font.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
-  <center>
-		<h4> Service de retrait d'argent </h4>
-		<form name="mon_formulaire" method="POST" action="confirm_retrait.php">
-		<table>
-			<tr>
-				<td>
-					<label> Veuillez saisir le code :</label>
-				</td>
-				<td>
-					<input class="form-control" type="text" name="code" id="code" maxlength="4">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<input class="btn btn-success" type="submit" name="confirmer" value="Valider">
-				</td>
-			</tr>
-		</table>
-		</form>
-</center>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+                <div class="container"> <a class="navbar-brand" href="#">
+                        <b> SMS Banking |</b> Espace gestionnaire
+                    </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse"
+                        data-target="#navbar4">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbar4">
+                        <ul class="navbar-nav ml-auto">
+                        </ul> 
+                        <a class="btn navbar-btn ml-md-2 btn-light" >Deconnexion</a>
+                    </div>
+                </div>
+            </nav>
+    <div class="">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center text-success"><u>Validation du retrait</u></h2>
+               
+				<form name="mon_formulaire" method="POST" action="confirm_retrait.php">
+                    <div class="form-group">
+							
+                        <label for="code">code de retrait:</label>
+                        <input type="text" class="form-control" id="code" name="code"
+                            placeholder="code de retrait" required maxlength="4">
+                    
+					</div>
+                    
+                    <input class="btn btn-success" type="submit" name="confirmer" value="Valider">
+					<?php
+				//erreur
+				echo "<p style='color:red'></p>";
+				     if(isset($erreur)) {
+					   echo '<font color="red">'.$erreur."</font>";}
+				//succees
+				echo "<p style='color:green'></p>";
+				     if(isset($success)) {
+					   echo '<font color="green">'.$success."</font>";
+					    }
+					   ?>
+				</form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../js/jquery-3.3.1.slim.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 </body>
+
 </html>
