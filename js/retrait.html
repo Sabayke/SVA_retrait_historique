@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="css/style.css">
+<script>
+function DemandeRetrait() {
+	var numtel = document.getElementById("numtel").value;
+	var montant      = document.getElementById("montant").value;
+	var xhttp = new XMLHttpRequest();
+	var url = 'php/retrait.php';
+	xhttp.open('POST', url, true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');  
+	  // mon code js
+	 var params="numtel="+numtel+"&montant="+montant;
+		xhttp.onreadystatechange = function() {
+		//Call a function when the state changes.
+		if(xhttp.readyState == 4 && xhttp.status == 200) {
+        alert(xhttp.responseText);
+    }
+}
+		xhttp.send(params);
+		}
+</script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container"> <a class="navbar-brand" href="#">
+                <b> SMS Banking |</b> Espace gestionnaire
+            </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse"
+                data-target="#navbar4">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar4">
+                <ul class="navbar-nav ml-auto">
+                </ul>
+                <a class="btn navbar-btn ml-md-2 btn-light">Deconnexion</a>
+            </div>
+        </div>
+    </nav>
+    <div class="">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center text-success"><u>Retirer de l&rsquo;argent</u></h2>
+				<form name="mon_formulaire" method="POST">
+                    <div class="form-group">
+                        <label for="numero">N° du client:</label>
+                        <input type="numeric" class="form-control" id="numtel" name="numtel"
+                            placeholder="N° de téléphone du client" required maxlength="9">
+                    </div>
+                    <div class="form-group">
+                        <label for="montant">Montant:</label>
+                        <input type="text" class="form-control" id="montant" name="montant" placeholder="Ex: 50000"
+                            required maxlength="6">
+                    </div>
+                    <input class="btn btn-success" type="button" name="confirmer" value="Valider" onclick="DemandeRetrait()"/>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>
