@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/font.css">
+  <link rel="stylesheet" href="css/style.css">
+<script>
+//function loadXMLDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "php/historiqueGestionnaire.php", true);
+  xhttp.send();
+//}
+</script>
+</head>
+                
+<div id="demo">
+<button class="btn btn-success" type="button" onclick="loadXMLDoc()">Historique</button>
+</div>
+<!--body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container"> <a class="navbar-brand" href="#">
+        <b> SMS Banking |</b> Espace gestionnaire </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar4">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar4">
+        <ul class="navbar-nav ml-auto">
+        </ul>
+        <a class="btn navbar-btn ml-md-2 btn-light">Deconnexion</a>
+      </div>
+    </div>
+  </nav>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+                <h2 class="text-center text-success"><u>Historique des transactions</u></h2>
+          <div class="table-responsive">
+            <table class="table table-bordered ">
+              <thead class="thead-success">
+                <tr>
+                  <th>Numéro</th>
+                  <th>Date</th>
+                  <th>Montant</th>
+                  <th>Type</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>1</th>
+                  <td>21-10-19 23:56:12</td>
+                  <td>50000</td>
+                  <td>retrait</td>
+                  <td><a href="details.html">Voir détails</a></td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/jquery-3.3.1.slim.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+ 
+</body>
+
+</html>
