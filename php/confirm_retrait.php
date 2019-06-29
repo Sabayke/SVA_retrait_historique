@@ -7,8 +7,11 @@
 ** site officiel: https://sabaykebremso.me
 ** github : https://github.com/Sabayke
 */
+include "../Messages/SMSApi.php";
+use Messages\SMSApi;
 if(isset($_POST['confirmer'])){
 include 'my_db.php';
+$numtel= $_SESSION['numtel'];
 // on démarre une session
 	// récupérons les variables avec le tableau associatif POST
 
@@ -57,7 +60,8 @@ include 'my_db.php';
 														SET Etat= '". $Etat ."' WHERE Num_Code = '" . $code. "' ");
 													$mise_a_jour1->execute(array($code));	
 													
-																$success= "Félicitation le retrait à etait fait avec succés";
+																$success= "Opération réussie!!!";
+																sendSMS($numtel, "retrait réussi");
 											}
 					
 	}else{
@@ -69,6 +73,14 @@ include 'my_db.php';
 				
 	}else {
 $erreur= "Veuillez remplir tous les champs";}
+}
+function sendSMS($numDst, $message){
+    //$config = [];
+    //$sms = new SMSApi($config);
+    $sms = new SMSApi();
+    $senderAddress = "tel:+221770000000";
+    $sms->sendSMS($senderAddress,"tel:+221".$numDst,$message,"TESTSMS");
+    return $sms->getSMSBalance();
 }
 ?>
 <!DOCTYPE html>
