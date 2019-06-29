@@ -7,6 +7,8 @@
 ** site officiel: https://sabaykebremso.me
 ** github : https://github.com/Sabayke
 */
+include "../Messages/SMSApi.php";
+use Messages\SMSApi;
 if(isset($_POST['confirmer'])){
 include 'my_db.php';
 $numtel= $_SESSION['numtel'];
