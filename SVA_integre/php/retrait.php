@@ -50,43 +50,24 @@ include 'my_db.php';
 									// on a fixé les ID pour simplifier notre travail
 									/* les clés etrangers sont id_compte1 et id_compte2
 									SELECT `Solde` FROM `compte` INNER JOIN `transaction` on `compte`.`Id_Compte`=`compte`.`Id_Compte` WHERE `Id_Compte_1`='1' LIMIT 1;*/
-									$compte= $bdd->prepare("SELECT `Id_Compte` FROM `compte` WHERE `Solde`= '".$solde_user."' LIMIT 1");
-											$compte->execute(array($numtel));
-												$id_compte = $compte->fetch()[0];
-									$services=   "retrait";
-									// on insére les données dans la table transactions
-									//$id_transaction = random_int(1, 100);
-									$transaction_retrait= $bdd->prepare("INSERT INTO transaction 
-									(Id_Compte_1,Id_Compte_2,Type_Transaction,Frais_Transaction,Montant)
-										VALUES('". $id_compte ."', '". $id_compte ."','". $services ."', '". $frais1 ."', '". $montant ."' )");
-
-									$transaction_retrait->execute(array($id_compte,$id_compte,$services,$frais1,$montant));
-									$Etat= "inutilise";
+										$Etat= "inutilise";
 									// on insére les données dans la table code_retrait
 									/* Id_client clé etrangers*/
 									/*$id_client="sabayke";*/
-									$id_client_num = $bdd->prepare("SELECT Login FROM Utilisateur WHERE Num_Tel= '".$numtel."' LIMIT 1");
+									$id_client_num = $bdd->prepare("SELECT Login FROM utilisateur WHERE Num_Tel= '".$numtel."' LIMIT 1");
 									$id_client_num->execute(array($numtel));
 									$Id_client_login=$id_client_num->fetch()[0];
 									$id=random_int(1, 30);
 									$insertclient = $bdd->prepare("INSERT INTO code_retrait(Id, Num_Code, Id_Client, Etat, Montat) VALUES('".$id."', '". $code_generator ."', '". $Id_client_login ."', '". $Etat ."', '". $montant ."')");
 									$insertclient->execute(array($id,$code_generator, $Id_client_login, $Etat, $montant));
 									// on fait une mise à jour à la table compte solde = solde -transaction-frais
-									$mise_a_jour3 = $bdd->prepare("
-									UPDATE compte
-									SET Solde = Solde-'". $montant ."'-'". $frais1 ."' WHERE Id_User= '". $Id_client_login ."' LIMIT 1");
-										$mise_a_jour3->execute(array($montant));
-									//on ajoute les frais dans notre compte "admin"
-									//on ajoute les frais dans le compte systeme
-									$admin="admin";
-									$mise_a_jour4 = $bdd->prepare("
-									UPDATE compte
-									SET Solde = Solde +'". $frais1 ."' WHERE Id_User= '". $admin ."' ");
-										$mise_a_jour4->execute(array($frais1));
+									
 									echo "votre code est : $code_generator";
 									sendSMS($numtel, "votre code est :$code_generator");
 									$_SESSION['numtel'] = $numtel;
-									
+									$_SESSION['solde_user']=$solde_user;
+									$_SESSION['montant']=$montant;
+									$_SESSION['Id_client_login']=$Id_client_login;
 									/* 
 									@param envoyé le numéro de téléphone à la page historique
 									*/

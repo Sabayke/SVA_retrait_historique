@@ -38,7 +38,7 @@
         <div class="col-md-12">
                 <h2 class="text-center text-success"><u>Historique des transactions</u></h2>
 
-      <?php   if ($reqExist == 1) { ?>
+      <?php   if ($reqExist > 0) { ?>
           <div class="table-responsive">
             <table class="table table-bordered ">
               <thead class="thead-success">

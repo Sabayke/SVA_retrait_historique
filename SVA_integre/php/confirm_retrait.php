@@ -11,11 +11,15 @@ include "../Messages/SMSApi.php";
 use Messages\SMSApi;
 if(isset($_POST['confirmer'])){
 include 'my_db.php';
-$numtel= $_SESSION['numtel'];
+
 // on démarre une session
 	// récupérons les variables avec le tableau associatif POST
 
 	$code    		= htmlspecialchars($_POST['code']);
+	$numtel= $_SESSION['numtel'];
+	$montant= $_SESSION['montant'];
+	$solde_user= $_SESSION['solde_user'];
+	$Id_client_login =$_SESSION['Id_client_login'];
 	if(!empty($code)){
 		// si le champs code n'est pas vide 
 				//on verifie  le montant
@@ -60,8 +64,33 @@ $numtel= $_SESSION['numtel'];
 														SET Etat= '". $Etat ."' WHERE Num_Code = '" . $code. "' ");
 													$mise_a_jour1->execute(array($code));	
 													
-																$success= "Opération réussie!!!";
-																sendSMS($numtel, "retrait réussi");
+													$success= "Opération réussie!!!";
+													//insertion transaction
+									$compte= $bdd->prepare("SELECT `Id_Compte` FROM `compte` WHERE `Solde`= '".$solde_user."' LIMIT 1");
+									$compte->execute(array($numtel));
+												$id_compte = $compte->fetch()[0];
+									$services=   "retrait";
+									// on insére les données dans la table transactions
+									//$id_transaction = random_int(1, 100);
+									$frais1 =25;
+									$transaction_retrait= $bdd->prepare("INSERT INTO transaction 
+									(Id_Compte_1,Id_Compte_2,Type_Transaction,Frais_Transaction,Montant)
+										VALUES('". $id_compte ."', '". $id_compte ."','". $services ."', '". $frais1 ."', '". $montant ."' )");
+
+									$transaction_retrait->execute(array($id_compte,$id_compte,$services,$frais1,$montant));
+											//update compte
+									$mise_a_jour3 = $bdd->prepare("
+									UPDATE compte
+									SET Solde = Solde-'". $montant ."'-'". $frais1 ."' WHERE Id_User= '". $Id_client_login ."' LIMIT 1");
+										$mise_a_jour3->execute(array($montant));
+									//on ajoute les frais dans notre compte "admin"
+									//on ajoute les frais dans le compte systeme
+									$admin="admin";
+									$mise_a_jour4 = $bdd->prepare("
+									UPDATE compte
+									SET Solde = Solde +'". $frais1 ."' WHERE Id_User= '". $admin ."' ");
+										$mise_a_jour4->execute(array($frais1));
+												sendSMS($numtel, "retrait réussi");
 											}
 					
 	}else{
