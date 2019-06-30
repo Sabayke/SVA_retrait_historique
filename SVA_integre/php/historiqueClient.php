@@ -65,7 +65,6 @@
                   <td><?php echo $transaction['Frais_Transaction'];?></td>
                   <td><?php echo $transaction['Solde']; ?></td>
 
-                  <td></a></td>
                 </tr>
               <?php
                   }
