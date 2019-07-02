@@ -12,8 +12,8 @@
 <body>
   <?php
  include 'my_db.php';
- $numtel = 780157046;
- $req_2 = $bdd->prepare("SELECT t.Frais_Transaction, t.Montant, t.Date_Transaction, c.Solde, c.Type_Compte FROM transaction t INNER JOIN compte c INNER JOIN utilisateur u on t.Id_Compte_1 = c.Id_Compte OR t.Id_Compte_2 = c.Id_Compte WHERE u.Num_Tel='".$numtel."' AND c.Type_Compte = 'gest' ORDER BY Date_Transaction LIMIT 5");
+ $numtel = 773244176;
+ $req_2 = $bdd->prepare("SELECT u.Num_Tel,t.Montant, t.Date_Transaction,t.Type_Transaction FROM transaction t INNER JOIN compte c INNER JOIN utilisateur u on t.Id_Compte_1 = c.Id_Compte OR t.Id_Compte_2 = c.Id_Compte WHERE u.Num_Tel='".$numtel."' AND c.Type_Compte = 'client' ORDER BY Date_Transaction LIMIT 5");
  $req_2->execute(array($numtel));
  $reqExist =  $req_2->rowCount();
 ?>
@@ -42,11 +42,11 @@
               <thead class="thead-success">
                 <tr>
                   <th>Numéro</th>
-                  <th>Date</th>
                   <th>Montant</th>
-                  <th>Type</th>
-                  <th>Frait</th>
-                  <th>Solde_restant</th>
+                  <th>Date de Transaction </th>
+                  <th>Type de Transaction</th>
+                  <th> Nombre total de Transaction </th>
+                  
                 </tr>
               </thead>
               <tbody>
@@ -56,11 +56,12 @@
                     ?>
                   <tr>
                   <td><?php echo $numtel; ?></td>
-                  <td><?php echo $transaction['Date_Transaction']; ?></td>
                   <td><?php echo $transaction['Montant']; ?></td>
-                  <td><?php echo $transaction['Type_Compte'];?></td>
-                  <td><?php echo $transaction['Frais_Transaction'];?></td>
-                  <td><?php echo $transaction['Solde'];?></td>
+                  <td><?php echo $transaction['Date_Transaction']; ?></td>
+                  <td><?php echo $transaction['Type_Transaction'];?></td>
+                  <td><?php echo $reqExist;?></td>
+                  
+                  
                 </tr>
                <?php
                 }

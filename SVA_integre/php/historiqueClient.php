@@ -15,7 +15,7 @@
   include 'my_db.php';
   $numtel = 773244176;
   //La requete sql
-  $req_2 = $bdd->prepare("SELECT t.Frais_Transaction, t.Montant, t.Date_Transaction, c.Solde, c.Type_Compte FROM transaction t INNER JOIN compte c INNER JOIN utilisateur u on t.Id_Compte_1 = c.Id_Compte OR t.Id_Compte_2 = c.Id_Compte WHERE u.Num_Tel='".$numtel."' AND c.Type_Compte = 'client' ORDER BY Date_Transaction LIMIT 5 ");
+  $req_2 = $bdd->prepare("SELECT t.Id_Transaction, t.Type_Transaction, t.Frais_Transaction, t.Montant, t.Date_Transaction, c.Solde FROM transaction t INNER JOIN compte c INNER JOIN utilisateur u on t.Id_Compte_1 = c.Id_Compte OR t.Id_Compte_2 = c.Id_Compte WHERE u.Num_Tel='".$numtel."' AND c.Type_Compte = 'client' ORDER BY Date_Transaction LIMIT 5 ");
   $req_2->execute(array($numtel));
   // Verifier si le requete n'est pas vide
   $reqExist = $req_2->rowCount();
@@ -43,10 +43,10 @@
             <table class="table table-bordered ">
               <thead class="thead-success">
                 <tr>
-                  <th>Numéro</th>
-                  <th>Date</th>
+                  <th>Id Transaction</th>
+                  <th>Date de transaction </th>
                   <th>Montant</th>
-                  <th>Type</th>
+                  <th>Type de Transaction</th>
                   <th>Frait</th>
                   <th>Solde_restant</th>
                 </tr>
@@ -58,10 +58,10 @@
             // On affiche chaque entrée une à une
              ?>
                 <tr>
-                  <td><?php echo $numtel; ?></td>
+                  <td><?php echo $transaction['Id_Transaction']; ?></td>
                   <td><?php echo $transaction['Date_Transaction']; ?></td>
                   <td><?php echo $transaction['Montant']; ?></td>
-                  <td><?php echo $transaction['Type_Compte'];?></td>
+                  <td><?php echo $transaction['Type_Transaction'];?></td>
                   <td><?php echo $transaction['Frais_Transaction'];?></td>
                   <td><?php echo $transaction['Solde']; ?></td>
 
